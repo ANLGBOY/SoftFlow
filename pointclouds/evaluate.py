@@ -63,10 +63,10 @@ def evaluate_gen(itr, model, results_mva, log, log_mva, args):
             if not isinstance(v, float):
                 v = v.cpu().detach().item()
             results[k] = v
-            results_mva[k] = (results_mva[k] * itr + v) / (itr+1)
+            results_mva[k] = (results_mva[k] * (itr-1) + v) / itr
 
         results['JSD'] = jsd
-        results_mva['JSD'] = (results_mva['JSD'] * itr + jsd) / (itr+1)
+        results_mva['JSD'] = (results_mva['JSD'] * (itr-1) + jsd) / itr
         results['itr'] = itr
         results_mva['itr'] = itr
 
